@@ -3,156 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>The Shadow Grimoire | Veil of Whispers</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=IM+Fell+English+SC&family=MedievalSharp&display=swap" rel="stylesheet">
+    <title>THE BLACK ALTAR | BLOOD & BINDING</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@900&family=Pirata+One&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
-        * {
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            box-sizing: border-box;
-        }
-
         :root {
-            --gold: #e4c580;
-            --blood: #8b2a2a;
-            --void: #03000a;
-            --parchment: #f2e9d0;
-            --ember: #ff7e4a;
-            --standard-glow: #6a4e2e;
-            --tithe-royal: #7a3e6e;
-            --abyss-dark: #3c1e2f;
+            --obsidian: #050205;
+            --blood: #4a0404;
+            --bruise: #2d1b33;
+            --gold: #c5a059;
+            --ash: #888;
         }
 
         body {
-            background: radial-gradient(ellipse at 30% 40%, #2c1420 0%, var(--void) 100%);
+            background: linear-gradient(to bottom, #0a050a, #000000);
             color: var(--gold);
-            font-family: 'IM Fell English SC', serif;
+            font-family: 'Pirata One', system-ui;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 10px;
             overflow-x: hidden;
-            perspective: 1200px;
-            position: relative;
+            text-shadow: 0 0 10px rgba(0,0,0,1);
         }
 
-        .living-background {
+        /* Occult Background Elements */
+        .sigil-bg {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .heart {
-            position: absolute;
-            font-size: 1.2rem;
-            opacity: 0.4;
-            animation: floatHeart linear infinite;
-            filter: drop-shadow(0 0 3px rgba(228,197,128,0.3));
-            pointer-events: none;
-        }
-
-        @keyframes floatHeart {
-            0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.5; }
-            100% { transform: translateY(-20vh) scale(1.2) rotate(15deg); opacity: 0; }
-        }
-
-        .firework-spark {
-            position: absolute;
-            width: 4px; height: 4px;
-            background: radial-gradient(circle, #ffb347, #ff4d4d);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vh; height: 90vh;
+            background: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            opacity: 0.1;
+            z-index: -1;
             border-radius: 50%;
-            opacity: 0;
-            animation: burstSpark 1.2s ease-out forwards;
-            pointer-events: none;
-            box-shadow: 0 0 6px gold;
+            border: 1px double var(--blood);
+            animation: rotate 60s linear infinite;
         }
 
-        @keyframes burstSpark {
-            0% { opacity: 0; transform: scale(0.2) translateY(0); }
-            20% { opacity: 0.9; transform: scale(1.5); }
-            100% { opacity: 0; transform: scale(0.5) translateY(-40px); }
-        }
+        @keyframes rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-        .glitter-mote {
-            position: absolute;
-            width: 2px; height: 2px;
-            background: #ffd966;
-            border-radius: 50%;
-            opacity: 0;
-            animation: driftGlitter 8s infinite linear;
-            pointer-events: none;
-            box-shadow: 0 0 4px #f3b33d;
-        }
-
-        @keyframes driftGlitter {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            30% { opacity: 0.8; }
-            100% { transform: translate(40px, -60px) rotate(90deg); opacity: 0; }
-        }
-
-        .veil {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            background-image: radial-gradient(2px 2px at 20% 30%, var(--gold) 1px, transparent 1px),
-                              radial-gradient(1px 1px at 70% 85%, #b96f30 1px, transparent 1px);
-            background-size: 70px 70px, 40px 40px;
-            opacity: 0.18;
-            animation: driftRunes 35s linear infinite;
-        }
-
-        .grimoire-header {
+        .header {
+            margin: 30px 0;
             text-align: center;
-            z-index: 15;
-            margin: 10px 0;
-            position: relative;
+            border-bottom: 2px solid var(--blood);
         }
 
         h1 {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 1.45rem;
-            letter-spacing: 3px;
-            background: linear-gradient(135deg, #efd592 10%, #b48b3a 70%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(228, 197, 128, 0.4);
+            font-family: 'UnifrakturMaguntia', serif;
+            font-size: 2.8rem;
             margin: 0;
+            letter-spacing: 5px;
+            color: var(--blood);
+            text-shadow: 0 0 20px rgba(74, 4, 4, 0.8);
         }
 
-        .sub {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: #b48b5a;
-            text-transform: uppercase;
-            border-top: 1px solid rgba(228, 197, 128, 0.3);
-            display: inline-block;
-            padding-top: 4px;
-        }
-
-        .card-holder {
-            position: relative;
-            width: 290px;
-            height: 400px;
-            z-index: 20;
-            margin: 15px 0;
-            filter: drop-shadow(0 15px 45px rgba(0,0,0,0.9));
+        .card-container {
+            width: 320px;
+            height: 460px;
+            perspective: 1000px;
+            margin-bottom: 20px;
         }
 
         .card {
             width: 100%;
             height: 100%;
             position: relative;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
 
         .card.flipped { transform: rotateY(180deg); }
@@ -161,215 +80,175 @@
             position: absolute;
             width: 100%; height: 100%;
             backface-visibility: hidden;
-            border-radius: 25px;
-            border: 2px solid var(--gold);
+            border: 3px solid var(--blood);
+            border-radius: 15px;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            padding: 30px;
+            align-items: center;
+            padding: 25px;
             text-align: center;
-            box-shadow: inset 0 0 60px rgba(0,0,0,0.95);
+            box-shadow: 0 0 30px rgba(0,0,0,1);
         }
 
-        .card-front { background: #0f0712 url('https://www.transparenttextures.com/patterns/hexellence.png'); }
+        .card-front {
+            background: var(--obsidian);
+            background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
+        }
 
         .card-back {
-            background: linear-gradient(145deg, #1a0b1c 0%, #050308 100%);
+            background: #110811;
             transform: rotateY(180deg);
-            color: var(--parchment);
-            font-family: 'MedievalSharp', serif;
-            font-size: 1rem;
-            line-height: 1.5;
-            border: 2px solid #634d2a;
+            border-color: var(--gold);
+            font-size: 1.2rem;
+            color: var(--ash);
+            letter-spacing: 1px;
         }
 
-        .ritual-altar {
+        .ritual-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            width: 100%;
-            max-width: 350px;
-            z-index: 25;
-            margin-top: 10px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 90%;
+            max-width: 400px;
         }
 
         button {
-            background: rgba(15, 8, 20, 0.9);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 12px 5px;
+            background: #1a0505;
+            border: 1px solid var(--blood);
+            color: var(--ash);
+            padding: 15px 5px;
             font-family: 'Cinzel Decorative', cursive;
-            font-size: 0.75rem;
-            border-radius: 10px;
-            transition: 0.2s;
+            font-size: 0.8rem;
+            text-transform: uppercase;
             cursor: pointer;
+            transition: 0.3s;
         }
 
-        .btn-standard { background: radial-gradient(circle at 30% 20%, #8b5a2b, #4a3620); }
-        .btn-tithe { background: radial-gradient(circle at 70% 30%, #6a2e6e, #35203b); }
-        .btn-abyss { background: radial-gradient(circle at 40% 50%, #2c1a2a, #150810); border-color: var(--blood); }
-        .btn-wide { grid-column: span 3; background: rgba(35, 15, 30, 0.8); }
+        button:hover {
+            background: var(--blood);
+            color: white;
+            box-shadow: 0 0 15px var(--blood);
+        }
 
-        .pact-overlay {
+        .btn-extreme {
+            grid-column: span 2;
+            background: linear-gradient(to right, #000, #4a0404, #000);
+            border: 1px solid var(--gold);
+            font-weight: bold;
+        }
+
+        #overlay {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.97);
-            z-index: 100;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
             display: none;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-        }
-
-        .pact-card {
-            background: #120b17;
-            border: 2px solid var(--gold);
-            padding: 35px;
-            border-radius: 20px;
+            align-items: center;
+            z-index: 1000;
             text-align: center;
-            width: 85%;
+            padding: 40px;
         }
     </style>
 </head>
 <body>
-    <div class="living-background" id="livingBg"></div>
-    <div class="veil"></div>
-
-    <div class="grimoire-header">
-        <h1>🜏 THE SHADOW GRIMOIRE 🜏</h1>
-        <div class="sub">✧ Rites of the Unspoken ✧</div>
+    <div class="sigil-bg"></div>
+    
+    <div class="header">
+        <h1>MALLEUS MALEFICARUM</h1>
+        <div style="font-size: 0.8rem; letter-spacing: 4px;">OWNERSHIP THROUGH AGONY</div>
     </div>
 
-    <div class="card-holder" id="cardContainer">
-        <div class="card" id="ritualCard">
+    <div class="card-container" onclick="this.querySelector('.card').classList.toggle('flipped')">
+        <div class="card" id="mainCard">
             <div class="card-face card-front">
-                <div style="font-size: 4rem; color: var(--gold);">◈</div>
-                <p>TOUCH THE VEIL</p>
+                <div style="font-size: 5rem; color: var(--blood); opacity: 0.5;">⛧</div>
+                <p style="color: var(--gold)">SURRENDER YOUR WILL</p>
             </div>
-            <div class="card-face card-back" id="oracleText">
-                <div class="ritual-text">Speak the command...</div>
+            <div class="card-face card-back" id="ritualText">
+                Select your sentence...
             </div>
         </div>
     </div>
 
-    <div class="ritual-altar">
-        <button onclick="handleRitual('standard')" class="btn-standard">Standard</button>
-        <button onclick="handleRitual('tithe')" class="btn-tithe">Queen's Tithe</button>
-        <button onclick="handleRitual('abyss')" class="btn-abyss">The Abyss</button>
-        <button onclick="handleRitual('finish')" class="btn-wide">⚔️ Final Judgment</button>
-        <button onclick="handleRitual('disposal')" class="btn-wide">🍷 The Disposal</button>
-        <button onclick="handleRitual('sanctuary')" class="btn-wide">🕯️ Afterglow</button>
+    <div class="ritual-grid">
+        <button onclick="invoke('penance')">Penance</button>
+        <button onclick="invoke('tithe')">Witch's Tithe</button>
+        <button onclick="invoke('humiliation')">Degradation</button>
+        <button onclick="invoke('binding')">The Binding</button>
+        <button onclick="invoke('abyss')" class="btn-extreme">THE ABYSS (EXTREME)</button>
+        <button onclick="invoke('ruin')" class="btn-extreme">THE RUIN (ENDING)</button>
     </div>
 
-    <div id="pactOverlay" class="pact-overlay">
-        <div class="pact-card">
-            <h2>Invoke the Rite?</h2>
-            <div style="display: flex; gap: 15px;">
-                <button onclick="confirmPact(true)" style="flex: 1;">Seal Pact</button>
-                <button onclick="confirmPact(false)" style="flex: 1;">Retreat</button>
-            </div>
-        </div>
+    <div id="overlay">
+        <h2 style="color: var(--blood); font-family: 'UnifrakturMaguntia'; font-size: 3rem;">ABANDON HOPE</h2>
+        <p>This path leads to total breaking. Do you accept the marks?</p>
+        <button onclick="confirmAbyss()" style="width: 200px; margin-bottom: 10px;">I AM HERS</button>
+        <button onclick="closeOverlay()" style="width: 200px; border-color: var(--ash);">RETREAT</button>
     </div>
 
     <script>
-        const RitualDecks = {
-            standard: [
-                "THE GRAVITY WELL: Secure weights to the sac. Stand perfectly still for 3 minutes. Any movement earns a squeeze.",
-                "THE CROW'S PINCH: Use sharp nails to find the skin between, pulling and pinching while I am restricted.",
-                "THE WICKED TWIST: Rotate the sac a full half-turn. Hold it while you tell me exactly what I am.",
-                "THE CRUSHING DEPTHS: Place the sac between your palms and slowly lean your weight into them.",
-                "THE BLOOD COIL: Tie thin lace or string around the base, cinching it tight while you toy with the tops.",
-                "THE COLD DECREE: Apply ice until they are shrunken and tight, then use your warm mouth to bring heat back.",
-                "THE MISTRESS'S CHOICE: You decide the tool and the tension. No limit for 60 seconds.",
-                "THE SILENT TRIAL: No words for 2 minutes. Every attempt to speak earns sudden, sharp pressure.",
-                "THE SORROW'S HINGE: Fold the sac gently but firmly. Rock it side to side while reciting my submission.",
-                "THE GILDED KNOT: Tie a silk cord around the package, tightening one notch each time I gasp.",
-                "THE RITUAL OF TWO PALMS: Cup them and slap upwards from below with rhythmic force, counting to thirteen.",
-                "THE MERCY THRESHOLD: Edge me with a flogger until I beg, then delay the strike for six heartbeats."
-            ],
-            abyss: [
-                "THE IRON GALLOWS: Weights attached. Stand on tiptoes. Every time heels touch the floor, deliver a brutal squeeze.",
-                "THE SILENT ANCHOR: Heavy clamp applied. Ignored for 10 minutes while kneeling. Any sound resets the timer.",
-                "THE WEAVER’S NEEDLE: Pin-tool tracing the seams. Agonizingly light pressure followed by a violent pinch.",
-                "THE GRAVITY CRUSH: Lay flat. Use your full weight to step on the sac, increasing pressure until I beg.",
-                "STRETCHED ON THE RACK: Pull the sac toward the floor while I am bound upright, ensuring skin is taut and vulnerable.",
-                "THE INCUBUS WEIGHT: I lie flat; you straddle my hips. Shift your weight slowly onto the dangling flesh."
+        const Grimoire = {
+            penance: [
+                "THE KNEELING STATUE: Place a heavy book on your head and heavy weights on your package. If the book falls, she delivers a violent strike.",
+                "THE SHARP TRACE: She traces the veins of your groin with a needle or sharp blade. You must thank her for every scratch without flinching.",
+                "THE COLD ISOLATION: Submerge the package in ice water for 3 minutes. When they are shrunken, she uses pliers or clamps to 'find' them again."
             ],
             tithe: [
-                "THE HUMAN FOOTREST: Legs spread and sac weighted. Support her feet while she rests. Wobbling earns a heel grind.",
-                "THE ROYAL CLEANSE: Use your tongue to clean her shoes/feet while the sac is stretched back between your legs.",
-                "THE BREATH COLLECTOR: No air allowed until she finishes a task. Your discomfort is her background music.",
-                "THE MARKET PRICE: She labels you with a marker—writing 'TRASH' across the skin while it is stretched taut."
+                "THE PEDESTAL: You are a piece of furniture. She rests her weight on your groin while she reads or uses her phone. You are not allowed to groan.",
+                "THE SACRIFICIAL LAPPING: Clean her boots with your tongue while your package is tightly cinched with wire or cord behind your legs.",
+                "THE MARKED SLAVE: She carves her initials into your skin with a marker—or a dull blade—to remind you who owns the flesh she toys with."
             ],
-            finish: [
-                "THE RUINED OFFERING: Edge to the absolute brink—then a crushing squeeze and a cold ice cube. No release.",
-                "THE BROKEN PRAYER: Release granted only while being painfully twisted. Thank her for the pain while you climax.",
-                "THE DEBT COLLECTOR: If he releases early, spend the next hour in heavy clamps while being ignored."
+            humiliation: [
+                "THE KITCHEN SCRAP: Kneel naked. She treats your package like waste, flicking them, laughing at your discomfort, and calling you 'it'.",
+                "THE VERBAL ASHES: While she applies painful pressure, recite 5 reasons why you are unworthy of a woman's touch.",
+                "THE EXHIBITION: Record a video of your package in heavy clamps, stating your name and your status as her broken property."
             ],
-            disposal: [
-                "FOR HER: THE CLAY MASK. Applied to her face and lips. She wears it as a silent, cherished statue.",
-                "FOR HER: THE GILDED COLLAR. Poured over her neck and chest. A permanent mark of the night’s love.",
-                "FOR HIM: THE BITTER SWALLOW. She takes it all while maintaining eye contact. Total consumption and surrender.",
-                "FOR HIM: THE RECLAMATION. She gathers the offering from her skin and feeds it back to you. Shared intimacy.",
-                "FOR BOTH: THE PRESS. Bodies crushed together until you are both coated and bound by the mess.",
-                "FOR BOTH: THE SILK WIPE. She uses her hair or her clothes to clean you, marking them with the offering."
+            binding: [
+                "THE SPIDER'S WEB: Use thin thread to wrap the package dozens of times until it is a purple, constricted mess. Leave it for 10 minutes.",
+                "THE IRON GALLOWS: Hang weights from the sac. You must walk across the room. Every swing that causes pain is a gift to her.",
+                "THE FIGURE EIGHT: Tight cord wrapped between the base and the balls, pulled so tight you cannot stand up straight."
             ],
-            sanctuary: [
-                "THE HEALER’S HANDS: Release all bindings. Cradle in warm palms with soft, loving strokes.",
-                "THE ANOINTING: Massage with warm oil. 'You did so well for me.'",
-                "THE BREATH OF LIFE: Head on chest; breathe in unison for 60 seconds of peace.",
-                "THE COVEN’S REST: No more commands. Just water and a soft touch on the cheek."
+            abyss: [
+                "THE BALL-STRETCHER RACK: Maximum weight applied. You are stood on a chair; she kicks the chair away. Your weight is the torture.",
+                "THE NEEDLE RITUAL: (SIMULATED/SAFE) She uses ice and sharp pressure to convince you she is piercing you. Total psychological breaking.",
+                "THE HEEL GRIND: She wears her sharpest heels and places the stiletto point directly on the sac, applying pressure until you sob."
+            ],
+            ruin: [
+                "THE RUINED OFFERING: Bring yourself to the absolute edge. At the peak, she delivers a crushing blow or a freezing shock. No release. Ever.",
+                "THE CONSUMPTION: If she allows a release, it must be into a bowl. You will then clean the bowl with your tongue until it shines.",
+                "THE PERMANENT CLAMP: The ritual ends, but the clamps stay on. You go to sleep in pain, knowing she has the key."
             ]
         };
 
-        let lastCategory = '';
-        let pendingCategory = '';
-        const card = document.getElementById('ritualCard');
-        const oracle = document.getElementById('oracleText');
-
-        function createHeart() {
-            const heartDiv = document.createElement('div');
-            heartDiv.classList.add('heart');
-            const hearts = ['❤️', '💖', '💜', '💗', '💘', '💕', '💚', '💞','🌶','😍','🥰','💙','😈','💋','❤️‍🔥','💥','💦','💣'];
-            heartDiv.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-            heartDiv.style.left = Math.random() * 100 + '%';
-            heartDiv.style.animationDuration = (5 + Math.random() * 5) + 's';
-            document.getElementById('livingBg').appendChild(heartDiv);
-            setTimeout(() => heartDiv.remove(), 10000);
-        }
-
-        setInterval(createHeart, 1000);
-
-        function handleRitual(category) {
-            if (category !== 'standard' && category !== 'sanctuary' && category !== lastCategory) {
-                pendingCategory = category;
-                document.getElementById('pactOverlay').style.display = 'flex';
-            } else {
-                drawRitual(category);
+        function invoke(type) {
+            if (type === 'abyss') {
+                document.getElementById('overlay').style.display = 'flex';
+                return;
             }
+            draw(type);
         }
 
-        function confirmPact(accepted) {
-            document.getElementById('pactOverlay').style.display = 'none';
-            if (accepted) {
-                lastCategory = pendingCategory;
-                drawRitual(pendingCategory);
-            }
+        function confirmAbyss() {
+            closeOverlay();
+            draw('abyss');
         }
 
-        function drawRitual(category) {
-            const deck = RitualDecks[category];
-            const ritual = deck[Math.floor(Math.random() * deck.length)];
+        function closeOverlay() {
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function draw(type) {
+            const list = Grimoire[type];
+            const text = list[Math.floor(Math.random() * list.length)];
+            const card = document.getElementById('mainCard');
+            
             card.classList.remove('flipped');
             setTimeout(() => {
-                oracle.innerHTML = `<div class="ritual-text">${ritual}</div>`;
+                document.getElementById('ritualText').innerHTML = `<strong>${type.toUpperCase()}</strong><br><br>${text}`;
                 card.classList.add('flipped');
-            }, 300);
-        }
-
-        function veto() {
-            card.classList.remove('flipped');
+            }, 400);
         }
     </script>
 </body>
