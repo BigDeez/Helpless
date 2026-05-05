@@ -8,14 +8,14 @@
     <style>
         :root {
             --obsidian: #050205;
-            --blood: #4a0404;
-            --bruise: #2d1b33;
-            --gold: #c5a059;
-            --ash: #888;
+            --blood: #5a0a0a;
+            --bruise: #1a0a1d;
+            --gold: #b48b3a;
+            --ash: #a0a0a0;
         }
 
         body {
-            background: linear-gradient(to bottom, #0a050a, #000000);
+            background: radial-gradient(circle, #1a0505 0%, #000 100%);
             color: var(--gold);
             font-family: 'Pirata One', system-ui;
             display: flex;
@@ -23,8 +23,9 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow-x: hidden;
-            text-shadow: 0 0 10px rgba(0,0,0,1);
+            padding: 20px;
+            overflow-y: auto; /* Allow scrolling if text is long */
+            box-sizing: border-box;
         }
 
         /* Occult Background Elements */
@@ -32,46 +33,55 @@
             position: fixed;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 90vh; height: 90vh;
+            width: 80vh; height: 80vh;
             background: url('https://www.transparenttextures.com/patterns/dark-matter.png');
-            opacity: 0.1;
+            opacity: 0.15;
             z-index: -1;
             border-radius: 50%;
-            border: 1px double var(--blood);
-            animation: rotate 60s linear infinite;
+            border: 2px double var(--blood);
+            animation: rotate 100s linear infinite;
         }
 
         @keyframes rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
         .header {
-            margin: 30px 0;
+            margin-bottom: 25px;
             text-align: center;
-            border-bottom: 2px solid var(--blood);
+            flex-shrink: 0;
         }
 
         h1 {
             font-family: 'UnifrakturMaguntia', serif;
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             margin: 0;
-            letter-spacing: 5px;
+            letter-spacing: 3px;
             color: var(--blood);
-            text-shadow: 0 0 20px rgba(74, 4, 4, 0.8);
+            text-shadow: 0 0 15px rgba(90, 10, 10, 0.9);
         }
 
+        .sub-head {
+            font-size: 0.75rem;
+            letter-spacing: 5px;
+            color: var(--ash);
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        /* Card Layout - Sized for mobile and desktop */
         .card-container {
-            width: 320px;
-            height: 460px;
-            perspective: 1000px;
-            margin-bottom: 20px;
+            width: 300px;
+            height: 380px;
+            perspective: 1200px;
+            margin-bottom: 30px;
+            flex-shrink: 0;
         }
 
         .card {
             width: 100%;
             height: 100%;
             position: relative;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
             transform-style: preserve-3d;
-            cursor: pointer;
         }
 
         .card.flipped { transform: rotateY(180deg); }
@@ -80,75 +90,96 @@
             position: absolute;
             width: 100%; height: 100%;
             backface-visibility: hidden;
-            border: 3px solid var(--blood);
-            border-radius: 15px;
+            border: 2px solid var(--blood);
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 0 30px rgba(0,0,0,1);
+            box-shadow: inset 0 0 50px #000, 0 10px 30px rgba(0,0,0,0.8);
+            box-sizing: border-box;
         }
 
         .card-front {
-            background: var(--obsidian);
-            background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
+            background: #0a0a0a;
+            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
         }
 
         .card-back {
-            background: #110811;
+            background: #0f050f;
             transform: rotateY(180deg);
             border-color: var(--gold);
-            font-size: 1.2rem;
-            color: var(--ash);
-            letter-spacing: 1px;
+            font-size: 1.15rem;
+            color: #ddd;
+            line-height: 1.4;
         }
 
+        /* The Ritual Altar - Organized Grid */
         .ritual-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            width: 90%;
-            max-width: 400px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: 40px; /* Space at bottom */
         }
 
         button {
-            background: #1a0505;
+            background: #150505;
             border: 1px solid var(--blood);
-            color: var(--ash);
-            padding: 15px 5px;
+            color: var(--gold);
+            padding: 12px 5px;
             font-family: 'Cinzel Decorative', cursive;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.2s ease-in-out;
+            border-radius: 4px;
         }
 
-        button:hover {
+        button:active {
+            transform: scale(0.95);
             background: var(--blood);
-            color: white;
-            box-shadow: 0 0 15px var(--blood);
+            color: #fff;
         }
 
-        .btn-extreme {
+        .btn-full {
             grid-column: span 2;
-            background: linear-gradient(to right, #000, #4a0404, #000);
-            border: 1px solid var(--gold);
-            font-weight: bold;
+            background: linear-gradient(45deg, #000, #400, #000);
+            border: 1px solid var(--blood);
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 2px;
         }
 
+        /* Overlay Fix */
         #overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.98);
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             text-align: center;
-            padding: 40px;
+            padding: 20px;
+        }
+
+        #overlay h2 {
+            color: var(--blood);
+            font-family: 'UnifrakturMaguntia';
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .ritual-text-content {
+            font-family: 'Pirata One', serif;
+            color: var(--ash);
+            border-top: 1px solid var(--blood);
+            padding-top: 15px;
         }
     </style>
 </head>
@@ -157,68 +188,68 @@
     
     <div class="header">
         <h1>MALLEUS MALEFICARUM</h1>
-        <div style="font-size: 0.8rem; letter-spacing: 4px;">OWNERSHIP THROUGH AGONY</div>
+        <div class="sub-head">DEVOTION THROUGH DEGRADATION</div>
     </div>
 
-    <div class="card-container" onclick="this.querySelector('.card').classList.toggle('flipped')">
-        <div class="card" id="mainCard">
+    <div class="card-container">
+        <div class="card" id="mainCard" onclick="this.classList.toggle('flipped')">
             <div class="card-face card-front">
-                <div style="font-size: 5rem; color: var(--blood); opacity: 0.5;">⛧</div>
-                <p style="color: var(--gold)">SURRENDER YOUR WILL</p>
+                <div style="font-size: 4rem; color: var(--blood); margin-bottom: 10px;">🜏</div>
+                <p style="color: var(--gold); letter-spacing: 2px;">TOUCH TO REVEAL YOUR FATE</p>
             </div>
             <div class="card-face card-back" id="ritualText">
-                Select your sentence...
+                <div class="ritual-text-content">The Mistress is waiting for your choice...</div>
             </div>
         </div>
     </div>
 
     <div class="ritual-grid">
         <button onclick="invoke('penance')">Penance</button>
-        <button onclick="invoke('tithe')">Witch's Tithe</button>
-        <button onclick="invoke('humiliation')">Degradation</button>
-        <button onclick="invoke('binding')">The Binding</button>
-        <button onclick="invoke('abyss')" class="btn-extreme">THE ABYSS (EXTREME)</button>
-        <button onclick="invoke('ruin')" class="btn-extreme">THE RUIN (ENDING)</button>
+        <button onclick="invoke('tithe')">The Tithe</button>
+        <button onclick="invoke('shame')">Shame</button>
+        <button onclick="invoke('binding')">Binding</button>
+        <button onclick="invoke('abyss')" class="btn-full">ENTER THE ABYSS</button>
+        <button onclick="invoke('ruin')" class="btn-full">THE FINAL RUIN</button>
     </div>
 
     <div id="overlay">
-        <h2 style="color: var(--blood); font-family: 'UnifrakturMaguntia'; font-size: 3rem;">ABANDON HOPE</h2>
-        <p>This path leads to total breaking. Do you accept the marks?</p>
-        <button onclick="confirmAbyss()" style="width: 200px; margin-bottom: 10px;">I AM HERS</button>
-        <button onclick="closeOverlay()" style="width: 200px; border-color: var(--ash);">RETREAT</button>
+        <h2>NO ESCAPE</h2>
+        <p style="color: var(--ash); max-width: 250px;">The Abyss does not tolerate hesitation. Do you submit to the extreme?</p>
+        <button onclick="confirmAbyss()" style="width: 220px; margin-bottom: 15px; border-color: var(--gold);">I AM PROPERTY</button>
+        <button onclick="closeOverlay()" style="width: 220px; background: transparent; border-color: #333;">RETREAT IN SHAME</button>
     </div>
 
     <script>
         const Grimoire = {
             penance: [
-                "THE KNEELING STATUE: Place a heavy book on your head and heavy weights on your package. If the book falls, she delivers a violent strike.",
-                "THE SHARP TRACE: She traces the veins of your groin with a needle or sharp blade. You must thank her for every scratch without flinching.",
-                "THE COLD ISOLATION: Submerge the package in ice water for 3 minutes. When they are shrunken, she uses pliers or clamps to 'find' them again."
+                "THE KNEELING STATUE: Balance a glass of water on your head while your package is weighted. If a drop spills, she delivers a sharp squeeze.",
+                "THE SHARP TRACE: She traces your sensitive areas with a cold, sharp needle. You must thank her for the 'gift' of her attention.",
+                "THE COLD DECREE: Apply ice until they are shrunken and purple. She then uses rough leather to 'warm' them with friction."
             ],
             tithe: [
-                "THE PEDESTAL: You are a piece of furniture. She rests her weight on your groin while she reads or uses her phone. You are not allowed to groan.",
-                "THE SACRIFICIAL LAPPING: Clean her boots with your tongue while your package is tightly cinched with wire or cord behind your legs.",
-                "THE MARKED SLAVE: She carves her initials into your skin with a marker—or a dull blade—to remind you who owns the flesh she toys with."
+                "THE ROYAL FOOTREST: Lie flat. She rests her weight on your groin while you describe how much better she is than you.",
+                "THE BOOT CLEANSE: Use your tongue to clean her footwear. Your package must be bound tightly behind you with cord.",
+                "THE LABELING: She writes 'TOY' or 'USELESS' on the skin of your sac while it is stretched to its limit."
             ],
-            humiliation: [
-                "THE KITCHEN SCRAP: Kneel naked. She treats your package like waste, flicking them, laughing at your discomfort, and calling you 'it'.",
-                "THE VERBAL ASHES: While she applies painful pressure, recite 5 reasons why you are unworthy of a woman's touch.",
-                "THE EXHIBITION: Record a video of your package in heavy clamps, stating your name and your status as her broken property."
+            shame: [
+                "THE VERBAL ASHES: Recite your most pathetic secret while she applies painful pressure. Your pain is her amusement.",
+                "THE MIRROR TRIAL: Look at yourself in a mirror while she laughs at your package. Repeat: 'This belongs to her, not me.'",
+                "THE BEGGING: You are not allowed to speak except to beg for more pain. Every silence is met with a sharp flick."
             ],
             binding: [
-                "THE SPIDER'S WEB: Use thin thread to wrap the package dozens of times until it is a purple, constricted mess. Leave it for 10 minutes.",
-                "THE IRON GALLOWS: Hang weights from the sac. You must walk across the room. Every swing that causes pain is a gift to her.",
-                "THE FIGURE EIGHT: Tight cord wrapped between the base and the balls, pulled so tight you cannot stand up straight."
+                "THE WEAVER’S TRAP: Wrap the package in tight thread or wire until blood flow is restricted. Hold for 5 minutes.",
+                "THE IRON GALLOWS: Hang heavy weights from the sac and stand on tiptoes. If your heels touch, the penalty is a strike.",
+                "THE FIGURE EIGHT: Cinch the base and the balls separately, pulling them in opposite directions until you sob."
             ],
             abyss: [
-                "THE BALL-STRETCHER RACK: Maximum weight applied. You are stood on a chair; she kicks the chair away. Your weight is the torture.",
-                "THE NEEDLE RITUAL: (SIMULATED/SAFE) She uses ice and sharp pressure to convince you she is piercing you. Total psychological breaking.",
-                "THE HEEL GRIND: She wears her sharpest heels and places the stiletto point directly on the sac, applying pressure until you sob."
+                "THE STAGE FOUR: Maximum weights. No support. She ignores you for 15 minutes while you hang in agony.",
+                "THE STILETTO POINT: She places the tip of her heel on the center of the sac and slowly leans her weight in.",
+                "THE TOTAL BREAK: Bind yourself until you cannot move. She toys with you until you lose your mind, then walks away."
             ],
             ruin: [
-                "THE RUINED OFFERING: Bring yourself to the absolute edge. At the peak, she delivers a crushing blow or a freezing shock. No release. Ever.",
-                "THE CONSUMPTION: If she allows a release, it must be into a bowl. You will then clean the bowl with your tongue until it shines.",
-                "THE PERMANENT CLAMP: The ritual ends, but the clamps stay on. You go to sleep in pain, knowing she has the key."
+                "THE RUINED OFFERING: Bring yourself to the very brink. At the peak, she crushes them or uses ice. No release is permitted.",
+                "THE RECLAMATION: If release is granted, it must be licked off her boots or the floor. Leave nothing behind.",
+                "THE LOCKING: The ritual ends with a permanent clamp or cage. She keeps the key. You keep the ache."
             ]
         };
 
@@ -243,10 +274,11 @@
             const list = Grimoire[type];
             const text = list[Math.floor(Math.random() * list.length)];
             const card = document.getElementById('mainCard');
+            const ritualContainer = document.getElementById('ritualText');
             
             card.classList.remove('flipped');
             setTimeout(() => {
-                document.getElementById('ritualText').innerHTML = `<strong>${type.toUpperCase()}</strong><br><br>${text}`;
+                ritualContainer.innerHTML = `<div class="ritual-text-content"><b style="color:var(--blood)">${type.toUpperCase()}</b><br><br>${text}</div>`;
                 card.classList.add('flipped');
             }, 400);
         }
