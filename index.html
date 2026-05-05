@@ -523,4 +523,105 @@
                 pendingCategory = category;
                 document.getElementById('pactOverlay').style.display = 'flex';
             } else {
-                drawCard(catego
+                drawCard(category);
+            }
+        }
+
+        function confirmPact(yes) {
+            document.getElementById('pactOverlay').style.display = 'none';
+            if (yes) {
+                lastCategory = pendingCategory;
+                drawCard(pendingCategory);
+            }
+        }
+
+        function drawCard(category) {
+            const deck = RitualDecks[category];
+            let text = "";
+            if(deck && deck.length) {
+                text = deck[Math.floor(Math.random() * deck.length)];
+            } else {
+                text = "Whispers remain silent...";
+            }
+            
+            // Celebration effect on draw - adds background fireworks
+            celebrateCardDraw();
+            
+            if (card.classList.contains('flipped')) {
+                card.classList.remove('flipped');
+                setTimeout(() => {
+                    oracle.innerHTML = `<div class="ritual-text">${text}</div>`;
+                    card.classList.add('flipped');
+                }, 400);
+            } else {
+                oracle.innerHTML = `<div class="ritual-text">${text}</div>`;
+                card.classList.add('flipped');
+            }
+        }
+
+        function veto() {
+            // Banishing effect also triggers a dark burst, but still playful background
+            const containerRect = document.getElementById('cardContainer').getBoundingClientRect();
+            const xCenter = ((containerRect.left + containerRect.width/2) / window.innerWidth) * 100;
+            const yCenter = ((containerRect.top + containerRect.height/2) / window.innerHeight) * 100;
+            // For banish, heart-shaped "ash" effect
+            for(let i=0;i<12;i++) {
+                const ashHeart = document.createElement('div');
+                ashHeart.classList.add('heart');
+                ashHeart.innerHTML = '💨';
+                ashHeart.style.fontSize = '0.9rem';
+                ashHeart.style.left = `${xCenter + (Math.random() - 0.5) * 12}%`;
+                ashHeart.style.top = `${yCenter + (Math.random() - 0.5) * 12}%`;
+                ashHeart.style.animationDuration = '0.8s';
+                ashHeart.style.opacity = '0.7';
+                document.getElementById('livingBg').appendChild(ashHeart);
+                setTimeout(() => ashHeart.remove(), 900);
+            }
+            
+            card.style.transition = '0.3s';
+            card.style.transform = 'scale(0.8) rotate(-10deg)';
+            card.style.opacity = '0';
+            
+            setTimeout(() => {
+                card.classList.remove('flipped');
+                oracle.innerHTML = `<div class="ritual-text">Sigil Burned...</div>`;
+                card.style.transform = 'scale(1) rotate(0deg)';
+                card.style.opacity = '1';
+                lastCategory = ''; 
+                drawCard('standard');
+            }, 400);
+        }
+
+        // Manual flip by clicking the card
+        document.getElementById('cardContainer').onclick = () => {
+            card.classList.toggle('flipped');
+            // spark of joy when flipped manually
+            const rect = document.getElementById('cardContainer').getBoundingClientRect();
+            const sparkX = ((rect.left + rect.width/2) / window.innerWidth) * 100;
+            const sparkY = ((rect.top + rect.height/2) / window.innerHeight) * 100;
+            for(let i=0;i<5;i++) {
+                setTimeout(() => {
+                    const flash = document.createElement('div');
+                    flash.classList.add('firework-spark');
+                    flash.style.left = `${sparkX + (Math.random() - 0.5)*8}%`;
+                    flash.style.top = `${sparkY + (Math.random() - 0.5)*8}%`;
+                    flash.style.animation = 'burstSpark 0.6s ease-out forwards';
+                    document.getElementById('livingBg').appendChild(flash);
+                    setTimeout(() => flash.remove(), 700);
+                }, i*40);
+            }
+        };
+        
+        // Limiting total elements in background to keep performance smooth
+        setInterval(() => {
+            const bg = document.getElementById('livingBg');
+            if(bg && bg.children.length > 180) {
+                const excess = bg.children.length - 150;
+                for(let i=0; i<excess; i++) {
+                    if(bg.firstChild) bg.firstChild.remove();
+                }
+            }
+        }, 15000);
+    </script>
+</body>
+</html>
