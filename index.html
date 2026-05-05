@@ -234,15 +234,17 @@
             transform: rotateY(180deg);
             color: var(--parchment);
             font-family: 'MedievalSharp', serif;
-            font-size: 1.15rem;
-            line-height: 1.5;
+            font-size: 1.0rem; /* Reduced slightly to fit longer text */
+            line-height: 1.4;
             justify-content: center;
             border: 2px solid #634d2a;
+            overflow-y: auto; /* Ensure long text is scrollable if needed */
         }
 
         .ritual-text {
             text-shadow: 2px 2px 8px rgba(0,0,0,1);
             animation: fadeIn 0.5s ease-out;
+            padding: 5px;
         }
 
         @keyframes fadeIn {
@@ -356,7 +358,6 @@
     </style>
 </head>
 <body>
-    <!-- MOVING BACKGROUND: Hearts & Fireworks & Glitter -->
     <div class="living-background" id="livingBg"></div>
     <div class="veil"></div>
     <div class="candle-glow"></div>
@@ -400,37 +401,54 @@
     </div>
 
     <script>
-        // Unchanged cards data - exactly as original
+        // Updated cards data with your extreme and exciting activities
         const RitualDecks = {
             standard: [
-                "THE GRAVITY WELL · Secure weights to the sac. Stand motionless for 3 minutes. Any tremor earns a slow, crushing squeeze.", 
-                "THE CROW'S PINCH · With sharp nails, find the skin between. Pull and pinch while you whisper my true title.", 
-                "THE WICKED TWIST · Rotate the flesh a full half-turn. Hold while you recite: 'I am yours.'",
-                "THE CRUSHING DEPTHS · Place between your palms and slowly lean weight into them. Count ten heartbeats."
+                "THE GRAVITY WELL: Secure weights to the sac. Stand perfectly still for 3 minutes. Any movement earns a squeeze.",
+                "THE CROW'S PINCH: Use sharp nails to find the skin between, pulling and pinching while I am restricted.",
+                "THE WICKED TWIST: Rotate the sac a full half-turn. Hold it while you tell me exactly what I am.",
+                "THE CRUSHING DEPTHS: Place the sac between your palms and slowly lean your weight into them.",
+                "THE BLOOD COIL: Tie thin lace or string around the base, cinching it tight while you toy with the tops.",
+                "THE COLD DECREE: Apply ice until they are shrunken and tight, then use your warm mouth to bring heat back.",
+                "THE MISTRESS'S CHOICE: You decide the tool and the tension. No limit for 60 seconds.",
+                "THE SILENT TRIAL: No words for 2 minutes. Every attempt to speak earns sudden, sharp pressure.",
+                "THE SORROW'S HINGE: Fold the sac gently but firmly. Rock it side to side while reciting my submission.",
+                "THE GILDED KNOT: Tie a silk cord around the package, tightening one notch each time I gasp.",
+                "THE RITUAL OF TWO PALMS: Cup them and slap upwards from below with rhythmic force, counting to thirteen.",
+                "THE MERCY THRESHOLD: Edge me with a flogger until I beg, then delay the strike for six heartbeats."
             ],
             abyss: [
-                "THE IRON GALLOWS · Weights attached. Stand on tiptoes. Each time heels touch floor, deliver a brutal squeeze.", 
-                "THE SILENT ANCHOR · Heavy clamp applied. Ignored for 10 minutes kneeling.",
-                "THE WEAVER'S NEEDLE · Trace the seams with a pin. Agonizing light pressure then a violent pinch at random."
+                "THE IRON GALLOWS: Weights attached. Stand on tiptoes. Every time heels touch the floor, deliver a brutal squeeze.",
+                "THE SILENT ANCHOR: Heavy clamp applied. Ignored for 10 minutes while kneeling. Any sound resets the timer.",
+                "THE WEAVER’S NEEDLE: Pin-tool tracing the seams. Agonizingly light pressure followed by a violent pinch.",
+                "THE GRAVITY CRUSH: Lay flat. Use your full weight to step on the sac, increasing pressure until I beg.",
+                "STRETCHED ON THE RACK: Pull the sac toward the floor while I am bound upright, ensuring skin is taut and vulnerable.",
+                "THE INCUBUS WEIGHT: I lie flat; you straddle my hips. Shift your weight slowly onto the dangling flesh."
             ],
             tithe: [
-                "FOOTREST · Legs spread, sac weighted. Support her feet while she rests.", 
-                "THE ROYAL CLEANSE · Use your tongue to clean her soles while the sac is stretched.",
-                "THE MARKET PRICE · She marks you with ink: 'Tribute' across stretched skin. Wear it for one hour."
+                "THE HUMAN FOOTREST: Legs spread and sac weighted. Support her feet while she rests. Wobbling earns a heel grind.",
+                "THE ROYAL CLEANSE: Use your tongue to clean her shoes/feet while the sac is stretched back between your legs.",
+                "THE BREATH COLLECTOR: No air allowed until she finishes a task. Your discomfort is her background music.",
+                "THE MARKET PRICE: She labels you with a marker—writing 'TRASH' across the skin while it is stretched taut."
             ],
             finish: [
-                "THE RUINED OFFERING · Edge to absolute brink— then a crushing squeeze and an ice shard. No release.", 
-                "THE BROKEN PRAYER · Release granted only while being painfully twisted. Thank her for the agony."
+                "THE RUINED OFFERING: Edge to the absolute brink—then a crushing squeeze and a cold ice cube. No release.",
+                "THE BROKEN PRAYER: Release granted only while being painfully twisted. Thank her for the pain while you climax.",
+                "THE DEBT COLLECTOR: If he releases early, spend the next hour in heavy clamps while being ignored."
             ],
             disposal: [
-                "THE CLAY MASK · Applied to her face and lips. Worn as a sacred, silent statue.", 
-                "THE GILDED COLLAR · Poured over her neck and chest. A permanent mark of the night's surrender.",
-                "THE BITTER SWALLOW · She takes it all while maintaining eye contact. Total consumption."
+                "FOR HER: THE CLAY MASK. Applied to her face and lips. She wears it as a silent, cherished statue.",
+                "FOR HER: THE GILDED COLLAR. Poured over her neck and chest. A permanent mark of the night’s love.",
+                "FOR HIM: THE BITTER SWALLOW. She takes it all while maintaining eye contact. Total consumption and surrender.",
+                "FOR HIM: THE RECLAMATION. She gathers the offering from her skin and feeds it back to you. Shared intimacy.",
+                "FOR BOTH: THE PRESS. Bodies crushed together until you are both coated and bound by the mess.",
+                "FOR BOTH: THE SILK WIPE. She uses her hair or her clothes to clean you, marking them with the offering."
             ],
             sanctuary: [
-                "THE HEALER’S HANDS · Release all bindings. Cradle in warm palms with slow, loving strokes.", 
-                "THE ANOINTING · Massage with blessed oil. 'You served well, beloved.'",
-                "THE MOON SALVE · Cooling balm applied over all tender parts. Safety until dawn."
+                "THE HEALER’S HANDS: Release all bindings. Cradle in warm palms with soft, loving strokes.",
+                "THE ANOINTING: Massage with warm oil. 'You did so well for me.'",
+                "THE BREATH OF LIFE: Head on chest; breathe in unison for 60 seconds of peace.",
+                "THE COVEN’S REST: No more commands. Just water and a soft touch on the cheek."
             ]
         };
 
@@ -443,7 +461,7 @@
         function createHeart() {
             const heartDiv = document.createElement('div');
             heartDiv.classList.add('heart');
-            const hearts = ['❤️', '💖', '💜', '💗', '💘', '💕', '💚', '💞''🌶','😍','🥰','💙','😈','💋','❤️‍🔥','🧡','💛','💚','💙','🩵','🤎','🖤','🩶','🤍','💥','💦','💣',];
+            const hearts = ['❤️', '💖', '💜', '💗', '💘', '💕', '💚', '💞','🌶','😍','🥰','💙','😈','💋','❤️‍🔥','🧡','💛','💚','💙','🩵','🤎','🖤','🩶','🤍','💥','💦','💣'];
             heartDiv.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
             const size = 0.8 + Math.random() * 1.2;
             heartDiv.style.fontSize = `${size}rem`;
@@ -455,7 +473,6 @@
             setTimeout(() => { if(heartDiv && heartDiv.remove) heartDiv.remove(); }, 12000);
         }
 
-        // Firework burst at random positions (like celebrating sparks)
         function spawnFireworkBurst(xPercent, yPercent) {
             const burstCount = 12 + Math.floor(Math.random() * 12);
             for (let i = 0; i < burstCount; i++) {
@@ -474,154 +491,10 @@
             }
         }
 
-        // Random firework initiation (floating across the background)
         function triggerRandomFirework() {
             const randX = 10 + Math.random() * 80;
             const randY = 20 + Math.random() * 70;
             spawnFireworkBurst(randX, randY);
         }
 
-        // Glitter floating particles
-        function createGlitterMote() {
-            const mote = document.createElement('div');
-            mote.classList.add('glitter-mote');
-            mote.style.left = `${Math.random() * 100}%`;
-            mote.style.top = `${Math.random() * 100}%`;
-            mote.style.width = `${2 + Math.random() * 4}px`;
-            mote.style.height = mote.style.width;
-            mote.style.animationDuration = `${4 + Math.random() * 8}s`;
-            mote.style.animationDelay = `${Math.random() * 6}s`;
-            mote.style.background = `rgba(255, ${180 + Math.random() * 75}, ${80 + Math.random() * 80}, 0.7)`;
-            document.getElementById('livingBg').appendChild(mote);
-            setTimeout(() => { if(mote && mote.remove) mote.remove(); }, 11000);
-        }
-
-        // Periodic elements: hearts constantly, fireworks rarely, glitter gently
-        let heartInterval = setInterval(() => { createHeart(); }, 800);
-        let fireworkInterval = setInterval(() => { 
-            if (Math.random() > 0.45) triggerRandomFirework(); 
-        }, 5000);
-        let glitterInterval = setInterval(() => { 
-            for(let i=0;i<3;i++) createGlitterMote(); 
-        }, 2500);
-
-        // Additional interactive fireworks on category change? subtle but lively: adds burst when drawing card
-        function celebrateCardDraw() {
-            const containerRect = document.getElementById('cardContainer').getBoundingClientRect();
-            const centerX = ((containerRect.left + containerRect.width/2) / window.innerWidth) * 100;
-            const centerY = ((containerRect.top + containerRect.height/2) / window.innerHeight) * 100;
-            spawnFireworkBurst(centerX, centerY);
-            // also extra small hearts around
-            for(let i=0;i<6;i++) {
-                setTimeout(() => createHeart(), i*70);
-            }
-        }
-
-        // preserve original functions but with background flair
-        function handleRitual(category) {
-            if (category !== 'standard' && category !== lastCategory) {
-                pendingCategory = category;
-                document.getElementById('pactOverlay').style.display = 'flex';
-            } else {
-                drawCard(category);
-            }
-        }
-
-        function confirmPact(yes) {
-            document.getElementById('pactOverlay').style.display = 'none';
-            if (yes) {
-                lastCategory = pendingCategory;
-                drawCard(pendingCategory);
-            }
-        }
-
-        function drawCard(category) {
-            const deck = RitualDecks[category];
-            let text = "";
-            if(deck && deck.length) {
-                text = deck[Math.floor(Math.random() * deck.length)];
-            } else {
-                text = "Whispers remain silent...";
-            }
-            
-            // Celebration effect on draw - adds background fireworks
-            celebrateCardDraw();
-            
-            if (card.classList.contains('flipped')) {
-                card.classList.remove('flipped');
-                setTimeout(() => {
-                    oracle.innerHTML = `<div class="ritual-text">${text}</div>`;
-                    card.classList.add('flipped');
-                }, 400);
-            } else {
-                oracle.innerHTML = `<div class="ritual-text">${text}</div>`;
-                card.classList.add('flipped');
-            }
-        }
-
-        function veto() {
-            // Banishing effect also triggers a dark burst, but still playful background
-            const containerRect = document.getElementById('cardContainer').getBoundingClientRect();
-            const xCenter = ((containerRect.left + containerRect.width/2) / window.innerWidth) * 100;
-            const yCenter = ((containerRect.top + containerRect.height/2) / window.innerHeight) * 100;
-            // For banish, heart-shaped "ash" effect
-            for(let i=0;i<12;i++) {
-                const ashHeart = document.createElement('div');
-                ashHeart.classList.add('heart');
-                ashHeart.innerHTML = '💨';
-                ashHeart.style.fontSize = '0.9rem';
-                ashHeart.style.left = `${xCenter + (Math.random() - 0.5) * 12}%`;
-                ashHeart.style.top = `${yCenter + (Math.random() - 0.5) * 12}%`;
-                ashHeart.style.animationDuration = '0.8s';
-                ashHeart.style.opacity = '0.7';
-                document.getElementById('livingBg').appendChild(ashHeart);
-                setTimeout(() => ashHeart.remove(), 900);
-            }
-            
-            card.style.transition = '0.3s';
-            card.style.transform = 'scale(0.8) rotate(-10deg)';
-            card.style.opacity = '0';
-            
-            setTimeout(() => {
-                card.classList.remove('flipped');
-                oracle.innerHTML = `<div class="ritual-text">Sigil Burned...</div>`;
-                card.style.transform = 'scale(1) rotate(0deg)';
-                card.style.opacity = '1';
-                lastCategory = ''; 
-                drawCard('standard');
-            }, 400);
-        }
-
-        // Manual flip by clicking the card
-        document.getElementById('cardContainer').onclick = () => {
-            card.classList.toggle('flipped');
-            // spark of joy when flipped manually
-            const rect = document.getElementById('cardContainer').getBoundingClientRect();
-            const sparkX = ((rect.left + rect.width/2) / window.innerWidth) * 100;
-            const sparkY = ((rect.top + rect.height/2) / window.innerHeight) * 100;
-            for(let i=0;i<5;i++) {
-                setTimeout(() => {
-                    const flash = document.createElement('div');
-                    flash.classList.add('firework-spark');
-                    flash.style.left = `${sparkX + (Math.random() - 0.5)*8}%`;
-                    flash.style.top = `${sparkY + (Math.random() - 0.5)*8}%`;
-                    flash.style.animation = 'burstSpark 0.6s ease-out forwards';
-                    document.getElementById('livingBg').appendChild(flash);
-                    setTimeout(() => flash.remove(), 700);
-                }, i*40);
-            }
-        };
-        
-        // Limiting total elements in background to keep performance smooth
-        setInterval(() => {
-            const bg = document.getElementById('livingBg');
-            if(bg && bg.children.length > 180) {
-                const excess = bg.children.length - 150;
-                for(let i=0; i<excess; i++) {
-                    if(bg.firstChild) bg.firstChild.remove();
-                }
-            }
-        }, 15000);
-    </script>
-</body>
-</html>
+        function creat
